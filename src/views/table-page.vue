@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <router-view />
+  dksaljdsljakd
 </template>
 
-<style scoped></style>
+<style lang="less" scoped></style>
