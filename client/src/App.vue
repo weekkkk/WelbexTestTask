@@ -11,9 +11,6 @@
   box-sizing: border-box;
 }
 html {
-  color: var(--wtt-text);
-  font-size: var(--wtt-fs);
-  line-height: var(--wtt-lh);
   font-family: "Ubuntu";
 }
 </style>
