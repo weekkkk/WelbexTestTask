@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { fetchTests } from "@/http/testAPI";
+
 import { CellModel, RowModel, TableModel } from "@/components/ui/table/models";
 import UiTable from "@/components/ui/table/ui-table.vue";
 import UiTd from "@/components/ui/table/ui-td.vue";
@@ -22,6 +24,10 @@ for (let i = 0; i < 21; i++) {
     });
   }
 }
+
+fetchTests({}).then((res) => {
+  console.log(res);
+});
 </script>
 
 <template>
