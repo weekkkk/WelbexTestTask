@@ -1,19 +1,20 @@
-import {
-  $host
-} from "./index";
+import { $host } from "./index";
 
-export const fetchTests = async ( model: { date: Date, name: string, count: number, distance: number }, page = 1, limit = 5 ) => {
-  const {
-    data
-  } = await $host.get( 'api/room', {
+export const fetchTests = async (
+  name: string = "",
+  count: number = 0,
+  distance: number = 0,
+  page: number = 1,
+  limit: number = 5
+) => {
+  const { data } = await $host.get("api/test", {
     params: {
-      date: model.date,
-      name: model.name,
-      count: model.count,
-      distance: model.distance,
-      page: page,
-      limit: limit
-    }
-  } )
-  return data
-}
+      name,
+      count,
+      distance,
+      page,
+      limit,
+    },
+  });
+  return data;
+};

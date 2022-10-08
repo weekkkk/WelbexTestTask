@@ -25,7 +25,7 @@ for (let i = 0; i < 21; i++) {
   }
 }
 
-fetchTests({}).then((res) => {
+fetchTests("", 0, 0).then((res) => {
   console.log(res);
 });
 </script>

@@ -10,20 +10,23 @@ class TestController {
       name,
       count,
       distance,
+      page,
+      limit
     } = req.query
     page = page || 1
     limit = limit || 10
-    let offset = page * limit - limit
     let where = {}
     if (date) where.date = date
     if (name) where.name = name
     if (count) where.count = count
     if (distance) where.distance = distance
-    const tests = await Room.findAll({
-      where: where,
+    const offset = page * limit - limit
+    const tests = await Test.findAll({
+      where: {},
       limit,
       offset
     })
+    return res.json(tests)
   }
 }
 
