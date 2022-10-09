@@ -54,12 +54,17 @@ const conditions = reactive([
  * Условие
  */
 const condition = ref(new OptionModel());
+/**
+ * События
+ */
+const emit = defineEmits(["search"]);
+const search = ref("");
 </script>
 
 <template>
   <div class="table-filter f d-c">
     <h2 class="mb-2">Filter</h2>
-    <div class="f cg-3">
+    <div class="f f-w j-e cg-3 rg-2">
       <ui-dropdown
         placeholder="Колонка"
         v-model="column"
@@ -72,8 +77,18 @@ const condition = ref(new OptionModel());
         class="conditions"
         :options="conditions"
       ></ui-dropdown>
-      <ui-input placeholder="Поиск..."> </ui-input>
-      <ui-button class="bold">Поиск</ui-button>
+      <ui-input placeholder="Поиск..." v-model="search"> </ui-input>
+      <ui-button
+        class="bold"
+        @click="
+          emit('search', {
+            columnId: column.Id,
+            conditionId: condition.Id,
+            search: search,
+          })
+        "
+        >Поиск</ui-button
+      >
     </div>
   </div>
 </template>

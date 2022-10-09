@@ -1,6 +1,6 @@
 <template>
   <div class="ui-td">
-    <label></label>
+    <!-- <label></label> -->
     <span>
       <slot></slot>
     </span>

@@ -19,17 +19,11 @@ export const fetchTests = async (
   return data;
 };
 
-export const createTest = async (
-  name: string,
-  count: number,
-  distance: number
-) => {
+export const createTest = async (name: string, count: number, distance: number) => {
   const { data } = await $host.post("api/test", {
-    params: {
-      name,
-      count,
-      distance,
-    },
+    name,
+    count,
+    distance,
   });
   return data;
 };

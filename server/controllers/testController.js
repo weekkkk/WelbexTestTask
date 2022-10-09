@@ -9,7 +9,7 @@ class TestController {
       name,
       count,
       distance
-    } = req.body.params
+    } = req.body
     const date = new Date()
     const test = await Test.create({
       date,
@@ -28,20 +28,28 @@ class TestController {
       page,
       limit
     } = req.query
-    page = page || 1
-    limit = limit || 10
+    page = Number(page) || 1
+    limit = Number(limit) || 10
     let where = {}
     if (date) where.date = date
     if (name) where.name = name
     if (count) where.count = count
     if (distance) where.distance = distance
     const offset = page * limit - limit
+    const all = await Test.findAll()
+    const length = all?.length
     const tests = await Test.findAll({
       where: {},
       limit,
       offset
     })
-    return res.json(tests)
+    return res.json({
+      tests,
+      page,
+      limit,
+      offset,
+      length
+    })
   }
 }
 

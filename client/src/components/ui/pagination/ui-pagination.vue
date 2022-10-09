@@ -42,14 +42,12 @@ const page = computed({
  * Установка стартового индекса
  */
 const setStart = () => {
-  console.log("setStart", page.value);
   emit("update:start", (page.value - 1) * props.limit);
 };
 /**
  * Установка конечного индекса
  */
 const setEnd = () => {
-  console.log("setEnd", page.value, "props.start", props.start);
   emit("update:end", props.start + props.limit);
 };
 /**
@@ -120,7 +118,7 @@ const range = computed(() => {
       class="page medium"
       secondary
       @click="onSelect(n)"
-      :disabled="n == '...'"
+      :disabled="n == '...' || n == page"
       v-for="n in range"
       :color="n == page ? 'blue' : 'gray'"
     >

@@ -4,40 +4,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { computed, onMounted, PropType, ref } from "vue";
-/**
- * Элемент
- */
-const $el = ref<HTMLElement>();
-/**
- * Усановка подписей строкам
- */
-const setLabelRow = () => {
-  if (!$el.value) return;
-  const rows = $el.value.parentElement?.children || [];
-  for (let i = 0; i < rows.length; i++) {
-    if (!rows[i].classList.contains("ui-th")) {
-      if (rows[i]) {
-        const cells = rows[i]?.children;
-        for (let j = 0; j < cells.length; j++) {
-          if (cells[j]) {
-            const cell = cells[j] as HTMLElement;
-            const label = cell.firstElementChild;
-            if (label) label.innerHTML = $el.value.children[j].innerHTML;
-          }
-        }
-      }
-    }
-  }
-};
-/**
- * При загрузке dom
- */
-onMounted(() => {
-  setLabelRow();
-});
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less">
 .ui-th {
