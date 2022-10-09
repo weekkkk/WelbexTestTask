@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { PropType, ref, computed } from "vue";
-import { ControlSizeEnum } from "./enums";
+import { InputSizeEnum } from "./enums";
 const props = defineProps({
+  /**
+   * Значение
+   */
+  modelValue: { type: String, default: "" },
   /**
    * Размер
    */
-  size: { type: String as PropType<ControlSizeEnum>, default: ControlSizeEnum.Default },
+  size: { type: String as PropType<InputSizeEnum>, default: InputSizeEnum.Default },
   /**
    * Успех
    */
@@ -22,7 +26,15 @@ const props = defineProps({
    * Aктивность
    */
   disabled: { type: Boolean, default: false },
+  /**
+   * Только для чтения
+   */
+  readonly: { type: Boolean, default: false },
 });
+/**
+ * События
+ */
+const emit = defineEmits(["update:modelValue", "focus", "blur"]);
 /**
  * Поле
  */
@@ -59,7 +71,16 @@ const style = computed(() => {
     }"
   >
     <slot name="left"></slot>
-    <input type="text" ref="$input" :disabled="disabled" />
+    <input
+      :value="modelValue"
+      @input="emit('update:modelValue', $event)"
+      @focus="emit('focus')"
+      @blur="emit('blur')"
+      type="text"
+      ref="$input"
+      :disabled="disabled"
+      :readonly="readonly"
+    />
     <span class="border"></span>
     <slot name="right"></slot>
   </div>
@@ -73,6 +94,7 @@ const style = computed(() => {
   overflow: hidden;
   transition-duration: var(--wtt-control-transition-duration);
   transition-timing-function: var(--wtt-control-timing-function);
+  transition-property: border-color;
   border-radius: var(--wtt-control-br);
   .border {
     content: "";
@@ -84,6 +106,7 @@ const style = computed(() => {
     z-index: 1;
     transition-duration: inherit;
     transition-timing-function: inherit;
+    transition-property: inherit;
     border-style: solid;
     border-radius: inherit;
     border-width: var(--wtt-control-bw);

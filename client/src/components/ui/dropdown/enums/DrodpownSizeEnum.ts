@@ -1,7 +1,7 @@
 /**
  * Размер
  */
-enum ControlSizeEnum {
+enum DrodpownSizeEnum {
   /**
    * Большой
    */
@@ -15,4 +15,4 @@ enum ControlSizeEnum {
    */
   Small = 'small',
 }
-export default ControlSizeEnum
+export default DrodpownSizeEnum
