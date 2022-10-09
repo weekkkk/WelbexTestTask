@@ -9,7 +9,7 @@ const options: OptionModel[] = [
   new OptionModel({
     Id: 1,
     Title: "Title 1",
-  } ),
+  }),
   new OptionModel({
     Id: 2,
     Title: "Title 2",
@@ -19,9 +19,17 @@ const option = ref(new OptionModel());
 </script>
 
 <template>
-  <div style="height: 200px"></div>
-  <ui-dropdown v-model="option" placeholder='Placeholder' :options="options"></ui-dropdown>
-  <ui-dropdown v-model="option" placeholder='Placeholder' :options="options"></ui-dropdown>
+  <h1 class="bold mb-3">Welbex Test Task</h1>
+  <ui-dropdown
+    v-model="option"
+    placeholder="Placeholder"
+    :options="options"
+  ></ui-dropdown>
+  <ui-dropdown
+    v-model="option"
+    placeholder="Placeholder"
+    :options="options"
+  ></ui-dropdown>
   <!-- <ui-input error></ui-input> -->
 </template>
 

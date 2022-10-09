@@ -6,7 +6,15 @@ const router = createRouter({
     {
       path: "",
       name: "default",
-      component: () => import("@/views/table-page.vue"),
+      redirect: "/table",
+      component: () => import("@/components/layout/layout.vue"),
+      children: [
+        {
+          path: "/table",
+          name: "table",
+          component: () => import("@/views/table-page.vue"),
+        },
+      ],
     },
   ],
 });
