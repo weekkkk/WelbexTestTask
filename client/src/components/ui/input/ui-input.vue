@@ -7,6 +7,10 @@ const props = defineProps({
    */
   modelValue: { type: String, default: "" },
   /**
+   * Заполнитель
+   */
+  placeholder: { type: String, default: "" },
+  /**
    * Размер
    */
   size: { type: String as PropType<InputSizeEnum>, default: InputSizeEnum.Default },
@@ -78,6 +82,7 @@ const style = computed(() => {
       @blur="emit('blur')"
       type="text"
       ref="$input"
+      :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
     />
@@ -91,11 +96,13 @@ const style = computed(() => {
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
   transition-duration: var(--wtt-control-transition-duration);
   transition-timing-function: var(--wtt-control-timing-function);
   transition-property: border-color;
   border-radius: var(--wtt-control-br);
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
   .border {
     content: "";
     position: absolute;
@@ -111,6 +118,7 @@ const style = computed(() => {
     border-radius: inherit;
     border-width: var(--wtt-control-bw);
     border-color: var(--wtt-control-bc);
+    z-index: 0;
   }
   input {
     cursor: inherit;
@@ -118,10 +126,17 @@ const style = computed(() => {
     border: none;
     background: none;
     line-height: inherit;
+    font-size: inherit;
+    font-family: inherit;
     z-index: 2;
     width: 100%;
     &:focus ~ .border {
       border-color: var(--wtt-control-bc-focus);
+    }
+    &::placeholder {
+      color: var(--wtt-control-placeholder);
+      font-size: inherit;
+      font-family: inherit;
     }
   }
   &.is-success .border {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PropType, ref, computed } from "vue";
-import UiInput from "../input/ui-input.vue";
 import { DrodpownSizeEnum } from "./enums";
 import { OptionModel } from "./models";
 const props = defineProps({
@@ -124,6 +123,7 @@ window.addEventListener("click", onBlur);
 <style lang="less" scoped>
 .ui-dropdown {
   position: relative;
+  width: 100%;
   .control {
     display: flex;
     align-items: center;
@@ -131,7 +131,7 @@ window.addEventListener("click", onBlur);
     overflow: hidden;
     transition-duration: var(--wtt-control-transition-duration);
     transition-timing-function: var(--wtt-control-timing-function);
-    transition-property: border-color;
+    // transition-property: border-color;
     border-radius: var(--wtt-control-br);
     border-color: var(--wtt-control-bc);
     cursor: pointer;
@@ -145,7 +145,7 @@ window.addEventListener("click", onBlur);
       z-index: 1;
       transition-duration: inherit;
       transition-timing-function: inherit;
-      transition-property: inherit;
+      // transition-property: inherit;
       border-style: solid;
       border-radius: inherit;
       border-width: var(--wtt-control-bw);

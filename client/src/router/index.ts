@@ -12,7 +12,7 @@ const router = createRouter({
         {
           path: "/table",
           name: "table",
-          component: () => import("@/views/table-page.vue"),
+          component: () => import("@/views/table/table.vue"),
         },
       ],
     },
