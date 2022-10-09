@@ -80,6 +80,7 @@ const style = computed(() => {
   color: var(--wtt-bg-1);
   &.is-secondary {
     background-color: var(--wtt-control-bg-disabled);
+    color: var(--wtt-subtext);
   }
   &.is-success {
     background-color: var(--wtt-success);
@@ -94,11 +95,13 @@ const style = computed(() => {
     cursor: not-allowed;
     opacity: 0.5;
   }
-  &:hover {
-    filter: brightness(105%);
-  }
-  &:active {
-    filter: brightness(95%);
+  &:not(.is-disabled) {
+    &:hover {
+      filter: brightness(105%);
+    }
+    &:active {
+      filter: brightness(95%);
+    }
   }
 }
 </style>
