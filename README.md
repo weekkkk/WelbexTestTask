@@ -1,5 +1,4 @@
-## Welbex Test Task
-# Test Task For Welbex
+# Welbex Test Task
 
 ## Project Setup
 
