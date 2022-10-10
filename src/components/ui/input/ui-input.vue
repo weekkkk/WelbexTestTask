@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref, computed } from "vue";
+import { PropType, ref, computed, InputHTMLAttributes } from "vue";
 import { InputSizeEnum } from "./enums";
 const props = defineProps({
   /**
@@ -77,7 +77,7 @@ const style = computed(() => {
     <slot name="left"></slot>
     <input
       :value="modelValue"
-      @input="emit('update:modelValue', $event)"
+      @input="emit('update:modelValue', ($event.target as any).value)"
       @focus="emit('focus')"
       @blur="emit('blur')"
       type="text"

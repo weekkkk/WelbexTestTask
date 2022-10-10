@@ -9,10 +9,6 @@ import { reactive, ref } from "vue";
  */
 const columns = reactive([
   new OptionModel({
-    Id: 0,
-    Title: "Дата",
-  }),
-  new OptionModel({
     Id: 1,
     Title: "Название",
   }),
@@ -34,19 +30,19 @@ const column = ref(new OptionModel());
  */
 const conditions = reactive([
   new OptionModel({
-    Id: 0,
+    Id: 1,
     Title: "Равно",
   }),
   new OptionModel({
-    Id: 1,
+    Id: 2,
     Title: "Содержит",
   }),
   new OptionModel({
-    Id: 2,
+    Id: 3,
     Title: "Больше",
   }),
   new OptionModel({
-    Id: 3,
+    Id: 4,
     Title: "Меньше",
   }),
 ]);
