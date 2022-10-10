@@ -5,11 +5,15 @@ const props = defineProps({
   /**
    * Значение
    */
-  modelValue: { type: String, default: "" },
+  modelValue: { type: [String, Number], default: "" },
   /**
    * Заполнитель
    */
   placeholder: { type: String, default: "" },
+  /**
+   * Тип значения
+   */
+  type: { type: String as PropType<"text" | "number">, default: "text" },
   /**
    * Размер
    */
@@ -80,7 +84,7 @@ const style = computed(() => {
       @input="emit('update:modelValue', ($event.target as any).value)"
       @focus="emit('focus')"
       @blur="emit('blur')"
-      type="text"
+      :type="type"
       ref="$input"
       :placeholder="placeholder"
       :disabled="disabled"

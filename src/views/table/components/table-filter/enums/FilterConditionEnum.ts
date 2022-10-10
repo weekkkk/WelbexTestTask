@@ -19,3 +19,4 @@ enum FilterConditionEnum {
    */
   Less = 4,
 }
+export default FilterConditionEnum;

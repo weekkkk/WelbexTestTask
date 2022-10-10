@@ -105,7 +105,7 @@ const range = computed(() => {
 </script>
 
 <template>
-  <div class="tir-pagination">
+  <div class="tir-pagination" v-if="length > limit">
     <ui-button
       class="page medium"
       secondary

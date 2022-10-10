@@ -1,23 +1,32 @@
 <script setup lang="ts">
+import { reactive, ref, computed } from "vue";
+/**
+ * Компоненты
+ */
 import UiDropdown from "@/components/ui/dropdown/ui-dropdown.vue";
 import UiInput from "@/components/ui/input/ui-input.vue";
 import UiButton from "@/components/ui/button/ui-button.vue";
+/**
+ * Модели для компонентов
+ */
 import { OptionModel } from "@/components/ui/dropdown/models";
-import { reactive, ref } from "vue";
+import { FilterConditionEnum } from "./enums";
+import { TestTableColumnEnum } from "../../enums";
+import { FilterRequestModel } from "./models";
 /**
  * Клонки по которым может производиться фильтрация
  */
 const columns = reactive([
   new OptionModel({
-    Id: 1,
+    Id: TestTableColumnEnum.Name,
     Title: "Название",
   }),
   new OptionModel({
-    Id: 2,
+    Id: TestTableColumnEnum.Count,
     Title: "Количество",
   }),
   new OptionModel({
-    Id: 3,
+    Id: TestTableColumnEnum.Distance,
     Title: "Дистанция",
   }),
 ]);
@@ -30,19 +39,19 @@ const column = ref(new OptionModel());
  */
 const conditions = reactive([
   new OptionModel({
-    Id: 1,
+    Id: FilterConditionEnum.Equals,
     Title: "Равно",
   }),
   new OptionModel({
-    Id: 2,
+    Id: FilterConditionEnum.Contains,
     Title: "Содержит",
   }),
   new OptionModel({
-    Id: 3,
+    Id: FilterConditionEnum.More,
     Title: "Больше",
   }),
   new OptionModel({
-    Id: 4,
+    Id: FilterConditionEnum.Less,
     Title: "Меньше",
   }),
 ]);
@@ -51,16 +60,47 @@ const conditions = reactive([
  */
 const condition = ref(new OptionModel());
 /**
+ * Занчение, c которым происходит сравнение
+ */
+const value = ref<string | number>("");
+/**
+ * Тип значения
+ */
+const valueType = computed(() => {
+  switch (column.value.Id) {
+    case TestTableColumnEnum.Name:
+      return "text";
+    case TestTableColumnEnum.Count:
+      return "number";
+    case TestTableColumnEnum.Distance:
+      return "number";
+  }
+});
+/**
  * События
  */
-const emit = defineEmits(["search"]);
-const search = ref("");
+const emit = defineEmits(["filter"]);
+/**
+ * При поиске
+ */
+const onFilter = () => {
+  emit(
+    "filter",
+    new FilterRequestModel({
+      Column: column.value.Id,
+      Condition: condition.value.Id,
+      Value: valueType.value == "number" ? Number(value.value) : value.value.toString(),
+    })
+  );
+};
 </script>
 
 <template>
   <div class="table-filter f d-c">
-    <h2 class="mb-2">Filter</h2>
-    <div class="f f-w j-e cg-3 rg-2">
+    <h2 class="mb-2">Фильтр</h2>
+    <ui-input class="mb-3" placeholder="Значение для фильтра" v-model="value" :type="valueType">
+    </ui-input>
+    <div class="f f-w cg-3 rg-2">
       <ui-dropdown
         placeholder="Колонка"
         v-model="column"
@@ -73,17 +113,11 @@ const search = ref("");
         class="conditions"
         :options="conditions"
       ></ui-dropdown>
-      <ui-input placeholder="Поиск..." v-model="search"> </ui-input>
       <ui-button
         class="bold"
-        @click="
-          emit('search', {
-            columnId: column.Id,
-            conditionId: condition.Id,
-            search: search,
-          })
-        "
-        >Поиск</ui-button
+        @click="onFilter"
+        :disabled="!column.Title || !condition.Title"
+        >Фильтрация</ui-button
       >
     </div>
   </div>
